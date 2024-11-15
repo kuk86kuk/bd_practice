@@ -2,7 +2,7 @@
 FROM spark:3.5.3-scala2.12-java17-python3-ubuntu
 
 # Копируем исходный код Scala и данные в контейнер
-COPY --chown=2000:2000 src/main/scala/First5Records.scala /opt/spark/work-dir/First5Records.scala
+COPY --chown=2000:2000 src/main/scala/example/First5Records.scala /opt/spark/work-dir/First5Records.scala
 COPY --chown=2000:2000 ml-100k/u.data /opt/spark/work-dir/data/u.data
 
 # Компилируем Scala-код
