@@ -1,0 +1,28 @@
++----------+-------------+----------+-----+-------------+------------+--------------------+------------------+-------+
+|        id|           ts|account_id| name|      address|phone_number|               email|savings_account_id|card_id|
++----------+-------------+----------+-----+-------------+------------+--------------------+------------------+-------+
+|a1globalid|1577863800000|        a1|Anton|       Moscow|    12345678|anthony@somebank.com|              NULL|   NULL|
+|a2globalid|1577873800000|        a2| Alex|      Atlanta|    98765432|   Alex@somebank.com|              NULL|   NULL|
+|a1globalid|1577894400000|      NULL| NULL|Yekaterinburg|        NULL|anthony@anotherba...|              NULL|   NULL|
+|a1globalid|1577890800000|      NULL| NULL|         NULL|        NULL|                NULL|               sa1|   NULL|
+|a2globalid|1577890900000|      NULL| NULL|         NULL|        NULL|                NULL|               sa2|   NULL|
+|a1globalid|1577865600000|      NULL| NULL|         NULL|    87654321|                NULL|              NULL|   NULL|
+|a1globalid|1577926800000|      NULL| NULL|         NULL|        NULL|                NULL|              NULL|     c1|
+|a1globalid|1579163400000|      NULL| NULL|         NULL|        NULL|                NULL|              NULL|     c2|
+|a1globalid|1579078860000|      NULL| NULL|         NULL|        NULL|                NULL|              NULL|       |
++----------+-------------+----------+-----+-------------+------------+--------------------+------------------+-------+
+
++-------------+----------+-------+--------------------+-----+------------+-------+------------------+
+|           ts|account_id|address|               email| name|phone_number|card_id|savings_account_id|
++-------------+----------+-------+--------------------+-----+------------+-------+------------------+
+|1577863800000|        a1| Moscow|anthony@somebank.com|Anton|    12345678|   NULL|              NULL|
+|1577865600000|        a1| Moscow|anthony@somebank.com|Anton|    12345678|   NULL|              NULL|
+|1577890800000|        a1| Moscow|anthony@somebank.com|Anton|    12345678|   NULL|               sa1|
+|1577894400000|        a1| Moscow|anthony@somebank.com|Anton|    12345678|   NULL|               sa1|
+|1577926800000|        a1| Moscow|anthony@somebank.com|Anton|    12345678|     c1|               sa1|
+|1579078860000|        a1| Moscow|anthony@somebank.com|Anton|    12345678|       |               sa1|
+|1579163400000|        a1| Moscow|anthony@somebank.com|Anton|    12345678|     c2|               sa1|
+|1577873800000|        a2|Atlanta|   Alex@somebank.com| Alex|    98765432|   NULL|              NULL|
+|1577890900000|        a2|Atlanta|   Alex@somebank.com| Alex|    98765432|   NULL|               sa2|
++-------------+----------+-------+--------------------+-----+------------+-------+------------------+
+
