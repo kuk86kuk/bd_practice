@@ -22,22 +22,30 @@ pg_conn = psycopg2.connect(
 )
 pg_cursor = pg_conn.cursor()
 
+# Функция для проверки существования таблицы в SQLite
+def table_exists_in_sqlite(table_name):
+    sqlite_cursor.execute(f"SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}'")
+    return sqlite_cursor.fetchone() is not None
+
 # Функция для создания таблицы-источника в SQLite
 def create_source_table():
-    sqlite_cursor.execute('''
-    CREATE TABLE IF NOT EXISTS source_table (
-        id INTEGER PRIMARY KEY,
-        name VARCHAR(100),
-        created_at DATETIME
-    )
-    ''')
-    sqlite_cursor.execute('''
-    INSERT INTO source_table (id, name, created_at)
-    VALUES (1, 'John Doe', '2023-10-01 10:00:00'),
-           (2, 'Jane Smith', '2023-10-02 11:00:00')
-    ''')
-    sqlite_conn.commit()
-    print("Таблица source_table создана и заполнена данными в SQLite.")
+    if not table_exists_in_sqlite("source_table"):
+        sqlite_cursor.execute('''
+        CREATE TABLE source_table (
+            id INTEGER PRIMARY KEY,
+            name VARCHAR(100),
+            created_at DATETIME
+        )
+        ''')
+        sqlite_cursor.execute('''
+        INSERT INTO source_table (id, name, created_at)
+        VALUES (1, 'John Doe', '2023-10-01 10:00:00'),
+               (2, 'Jane Smith', '2023-10-02 11:00:00')
+        ''')
+        sqlite_conn.commit()
+        print("Таблица source_table создана и заполнена данными в SQLite.")
+    else:
+        print("Таблица source_table уже существует в SQLite. Пропускаем создание.")
 
 # Функция для получения информации о таблице из SQLite
 def get_sqlite_table_info(table_name):
@@ -81,7 +89,7 @@ def transfer_data(table_name):
     pg_conn.commit()
     print(f"Данные из таблицы {table_name} перенесены в PostgreSQL.")
 
-# Создаем таблицу-источник в SQLite
+# Создаем таблицу-источник в SQLite, если она не существует
 create_source_table()
 
 # Список таблиц для переноса
@@ -107,4 +115,6 @@ pg_conn.close()
 # Останавливаем SparkSession
 spark.stop()
 
-print("Перенос данных завершен.")
+print("\n" + "=" * 50)
+print("  Перенос данных завершен  ".center(50, "="))
+print("=" * 50 + "\n")
