@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   postgres-source:
-    image: postgres:13
+    image: docker-proxy.artifactory.tcsbank.ru/postgres:13
     hostname: postgres
     ports:
       - "5432:5432"
@@ -18,11 +18,4 @@ services:
 
   spark:
     build:
-      context: .
       dockerfile: Dockerfile
-    depends_on:
-      - postgres-source
-    environment:
-      - POSTGRES_URL=jdbc:postgresql://postgres-source:5432/postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
